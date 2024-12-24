@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>PromptPay QR Payment</title>
+</head>
+
+<body>
+  <h1>PromptPay QR Payment</h1>
+  <div id="qrcode" class="barcode-container" onclick="setData()">
+    <p>คลิกเพื่อตั้งค่า</p>
+  </div>
+  <div class="input-section">
+    <input onchange="genQR()" type="number" id="amount" placeholder="Enter Amount (THB)" value="0" step="0.01"
+      min="0.01">
+    <button id="generate" onclick="genQR()">Generate QR Code</button>
+  </div>
+
+  <!-- script import -->
+  <script src="../node_modules/animejs/lib/anime.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+
+  <script>
+
+    let userInput = "00000";
+    function genQR() {
+      $.ajax({
+        url: 'http://localhost:3001/generateQR',
+        method: 'POST',
+        data: {
+          amount: $('#amount').val(),
+          mobile: userInput,
+        },
+        success: function (data) {
+
+          // Insert the new QR code URL into the DOM
+          document.querySelector(".barcode-container").innerHTML = data.url;
+          console.log("Data", data.url);
+          animateSVG();
+        }
+      });
+    }
+
+    function setData() {
+      // Use prompt to get user input for phone number
+      userInput = prompt("กรุณากรอกเบอร์โทรศัพท์");
+    }
+
+    function animateSVG() {
+      anime({
+        targets: 'svg path',  // เลือก path ใน SVG
+        strokeDashoffset: [anime.setDashoffset, 0],
+        easing: 'easeInOutSine',
+        duration: 1500,
+        delay: function (el, i) { return i * 250 },
+        // direction: 'alternate',
+        // loop: true
+      });
+    }
+  </script>
+
+</body>
+
+</html>

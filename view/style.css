@@ -1,0 +1,47 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+  background: #f4f4f9;
+}
+h1 {
+  color: #333;
+}
+
+.barcode-container{
+  background-color: #d8d7d7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.barcode-container:hover{
+  opacity: 0.6;
+}
+
+#qrcode {
+  margin: 20px auto;
+  width: 250px;
+  height: 250px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.input-section {
+  margin-top: 20px;
+}
+input[type="number"], button {
+  padding: 10px;
+  margin: 10px 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+button {
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #0056b3;
+}
