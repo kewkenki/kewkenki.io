@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const _ = require("lodash");
 const cors = require("cors");
 const path = require("path");
+const port = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -15,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public')));
 console.log(path.join(__dirname, '../public'));
 
-const server = app.listen(3001, () => {
+const server = app.listen(port, () => {
   console.log("Server is running on port 3001");
 });
 
